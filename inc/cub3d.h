@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/01 20:39:46 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/17 23:52:53 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 # include <sys/time.h>
 # include <math.h>
 # include <limits.h>
+# include <float.h>
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define FOV 0.66f
 
 typedef struct s_img
 {
@@ -75,6 +77,27 @@ typedef struct s_game
 	t_player	player;
 	t_tex		tex;
 }	t_game;
+
+typedef struct s_ray
+{
+	float	camera_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	float	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
 
 // cleanup
 void	cleanup(t_game game);
