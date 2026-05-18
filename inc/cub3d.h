@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 07:04:52 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/18 19:04:10 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define FOV 0.66f
-# define ROTATE_SPEED 0.05f
+# define ROTATE_SPEED 0.06f
 # define MOVE_SPEED 0.1f
 
 typedef struct s_point
@@ -74,8 +74,7 @@ typedef struct s_map
 typedef struct s_game
 {
 	mlx_t		*mlx;
-	void		*win;
-	void		*img;
+	mlx_image_t	*img;
 	t_map		map;
 	t_player	player;
 	t_tex		tex;
@@ -98,8 +97,6 @@ void	cleanup(t_game game);
 
 // init
 int		init(t_game *game);
-void	render_frame(void *param);
-void	rotate_right(t_player *p);
 
 // raycasting
 void	set_up_ray(t_player p, t_ray *r, int x);
@@ -109,9 +106,9 @@ void	get_wall_boundaries(t_ray *r);
 void	draw_col(t_game *g, t_ray r, int x);
 
 // rendering
-void	render_frame(void *param);
+void	render_frame(t_game *game);
 
 // movement
-void	keyhook(mlx_key_data_t keydata, void *param);
+void	update_movement(t_game *game);
 
 #endif

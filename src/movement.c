@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 07:03:46 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 07:04:22 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/18 19:03:30 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,18 @@ static void	move(t_game *g, int strafe, float speed)
 		g->player.pos.y = new_pos.y;
 }
 
-void	keyhook(mlx_key_data_t keydata, void *param)
+void	update_movement(t_game *game)
 {
-	t_game	*game;
-
-	game = (t_game *) param;
-	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-	{
-		if (keydata.key == MLX_KEY_LEFT)
-			rotate(&game->player, -ROTATE_SPEED);
-		if (keydata.key == MLX_KEY_RIGHT)
-			rotate(&game->player, ROTATE_SPEED);
-		if (keydata.key == MLX_KEY_W)
-			move(game, 0, MOVE_SPEED);
-		if (keydata.key == MLX_KEY_S)
-			move(game, 0, -MOVE_SPEED);
-		if (keydata.key == MLX_KEY_A)
-			move(game, 1, -MOVE_SPEED);
-		if (keydata.key == MLX_KEY_D)
-			move(game, 1, MOVE_SPEED);
-		if (keydata.key == MLX_KEY_ESCAPE)
-			mlx_close_window(game->mlx);
-	}
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+		move(game, 0, MOVE_SPEED);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+		move(game, 0, -MOVE_SPEED);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		move(game, 1, MOVE_SPEED);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		move(game, 1, -MOVE_SPEED);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		rotate(&game->player, -ROTATE_SPEED);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		rotate(&game->player, ROTATE_SPEED);
 }
