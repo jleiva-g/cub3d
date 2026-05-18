@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 07:06:59 by jleiva-g         ###   ########.fr       */
+/*   Created: 2026/05/18 07:02:14 by jleiva-g          #+#    #+#             */
+/*   Updated: 2026/05/18 07:02:21 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	main(int argc, char **argv)
+void	render_frame(void *param)
 {
-	t_game	game;
+	t_game	*game;
+	int		x;
+	t_ray	ray;
 
-	(void) argc;
-	(void) argv;
-	if (init(&game))
-		return (EXIT_FAILURE);
-	mlx_loop_hook(game.mlx, &render_frame, &game);
-	mlx_key_hook(game.mlx, &keyhook, &game);
-	mlx_loop(game.mlx);
-	cleanup(game);
-	return (EXIT_SUCCESS);
+	game = (t_game *) param;
+	x = 0;
+	while (x < WIDTH)
+	{
+		set_up_ray(game->player, &ray, x);
+		set_up_dda(game->player, &ray);
+		cast_ray(game, &ray);
+		get_wall_boundaries(&ray);
+		draw_col(game, ray, x);
+		x++;
+	}
 }

@@ -1,6 +1,7 @@
 NAME		=	cub3d
 HEADER		=	inc/cub3d.h
-SRC_FILES	=	main.c cleanup.c init.c
+SRC_FILES	=	main.c cleanup.c init.c raycasting.c rendering.c \
+				movement.c
 SRC_DIR		=	src
 SRC			=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR		=	$(SRC_DIR)/obj

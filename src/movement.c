@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/18 07:03:46 by jleiva-g          #+#    #+#             */
+/*   Updated: 2026/05/18 07:04:22 by jleiva-g         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/cub3d.h"
+
+static void	rotate(t_player *p, float speed)
+{
+	float	old_dir_x;
+
+	old_dir_x = p->dir.x;
+	p->dir.x = p->dir.x * cosf(speed) - p->dir.y * sinf(speed);
+	p->dir.y = old_dir_x * sinf(speed) + p->dir.y * cosf(speed);
+	p->plane.x = -p->dir.y * FOV;
+	p->plane.y = p->dir.x * FOV;
+}
+
+static void	move(t_game *g, int strafe, float speed)
+{
+	t_point	new_pos;
+
+	if (strafe)
+	{
+		new_pos.x = g->player.pos.x + g->player.plane.x * speed;
+		new_pos.y = g->player.pos.y + g->player.plane.y * speed;
+	}
+	else
+	{
+		new_pos.x = g->player.pos.x + g->player.dir.x * speed;
+		new_pos.y = g->player.pos.y + g->player.dir.y * speed;
+	}
+	if (g->map.grid[(int) g->player.pos.y][(int) new_pos.x] != '1')
+		g->player.pos.x = new_pos.x;
+	if (g->map.grid[(int) new_pos.y][(int) g->player.pos.x] != '1')
+		g->player.pos.y = new_pos.y;
+}
+
+void	keyhook(mlx_key_data_t keydata, void *param)
+{
+	t_game	*game;
+
+	game = (t_game *) param;
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	{
+		if (keydata.key == MLX_KEY_LEFT)
+			rotate(&game->player, -ROTATE_SPEED);
+		if (keydata.key == MLX_KEY_RIGHT)
+			rotate(&game->player, ROTATE_SPEED);
+		if (keydata.key == MLX_KEY_W)
+			move(game, 0, MOVE_SPEED);
+		if (keydata.key == MLX_KEY_S)
+			move(game, 0, -MOVE_SPEED);
+		if (keydata.key == MLX_KEY_A)
+			move(game, 1, -MOVE_SPEED);
+		if (keydata.key == MLX_KEY_D)
+			move(game, 1, MOVE_SPEED);
+		if (keydata.key == MLX_KEY_ESCAPE)
+			mlx_close_window(game->mlx);
+	}
+}
