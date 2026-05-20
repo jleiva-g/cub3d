@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 19:04:10 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:24:18 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_tex		tex;
+	char		*wname;
 }	t_game;
 
 typedef struct s_ray
@@ -96,7 +97,7 @@ typedef struct s_ray
 void	cleanup(t_game game);
 
 // init
-int		init(t_game *game);
+int		init(t_game *game, char **argv);
 
 // raycasting
 void	set_up_ray(t_player p, t_ray *r, int x);

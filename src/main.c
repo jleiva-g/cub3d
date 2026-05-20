@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 19:06:48 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:39:44 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	(void) argc;
-	(void) argv;
-	if (init(&game))
+	if (init(&game, argv))
 		return (EXIT_FAILURE);
 	mlx_loop_hook(game.mlx, &game_loop, &game);
 	mlx_key_hook(game.mlx, &keyhook, game.mlx);
 	mlx_loop(game.mlx);
+	free(game.wname); //This should be on the cleanup, it doesnt work on the cleanup
 	cleanup(game);
 	return (EXIT_SUCCESS);
 }

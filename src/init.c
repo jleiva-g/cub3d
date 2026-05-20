@@ -3,14 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 07:08:57 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:41:26 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+// Sets the name of the window to Arg[1] - maps/, so it only works if the name for the map is
+// maps/XXX.yyy. It will crash if strlen(argv[1]) < 5
+static void	set_wname(t_game *game, char **args)
+{
+	int	i;
+
+	i = 0;
+	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
+	if (!game->wname)
+	{
+		printf("Set_wname malloc issue");
+		return;
+	}
+	while (args[1][i + 5] != '.')
+	{
+		game->wname[i] = args[1][i + 5];
+		i++;
+	}
+	i = 0;
+	while (game->wname[i])
+	{
+		if (i == 0 && ft_isalpha(game->wname[i]))
+			game->wname[i] = ft_toupper(game->wname[i]);
+		else if (game->wname[i - 1] == '_')
+		{
+			if (ft_isalpha(game->wname[i]))
+				game->wname[i] = ft_toupper(game->wname[i]);
+			game->wname[i - 1] = ' ';
+		}
+		i++;
+	}
+}
 
 void	big_HARDcode(t_game *game)
 {
@@ -48,11 +81,13 @@ void	big_HARDcode(t_game *game)
 	game->player.plane.y = game->player.dir.x * FOV;
 }
 
-int	init(t_game *game)
+int	init(t_game *game, char **argv)
 {
 	// validate()
 	// parse()
-	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
+	if (argv[1])
+		set_wname(game, argv);
+	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
 	if (!game->mlx)
 		return (EXIT_FAILURE);
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
