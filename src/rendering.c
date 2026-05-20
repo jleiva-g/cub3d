@@ -6,13 +6,13 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 07:02:14 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 19:05:12 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:13:38 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	render_frame(t_game *game)
+static void	render_view(t_game *game)
 {
 	int		x;
 	t_ray	ray;
@@ -28,4 +28,9 @@ void	render_frame(t_game *game)
 		draw_col(game, ray, x);
 		x++;
 	}
+}
+
+void	render_frame(t_game *game)
+{
+	render_view(game);
 }
