@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/19 15:24:18 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/22 18:31:48 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define FOV 0.66f
-# define ROTATE_SPEED 0.06f
-# define MOVE_SPEED 0.1f
+# define ROTATE_SPEED 0.04f
+# define MOVE_SPEED 0.06f
+# define MM_TILE 16
+# define MM_SIZE 21
 
 typedef struct s_point
 {
@@ -105,6 +107,9 @@ void	set_up_dda(t_player p, t_ray *r);
 void	cast_ray(t_game *g, t_ray *r);
 void	get_wall_boundaries(t_ray *r);
 void	draw_col(t_game *g, t_ray r, int x);
+
+// minimap
+void	render_minimap(t_game *game);
 
 // rendering
 void	render_frame(t_game *game);
