@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/22 18:31:48 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/25 06:44:05 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,14 @@ typedef struct s_point
 	float	y;
 }	t_point;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*path;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_img;
-
 typedef struct s_tex
 {
-	t_img	north;
-	t_img	south;
-	t_img	west;
-	t_img	east;
-	t_img	door;
-	t_img	*weapon;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+	mlx_texture_t	*door;
+	mlx_texture_t	**weapon;
 }	t_tex;
 
 typedef struct s_player
@@ -91,30 +82,37 @@ typedef struct s_ray
 	t_point	grid_dist;
 	t_point	step;
 	int		side;
+	float	wall_dist;
+	int		wall_height;
 	int		wall_start;
 	int		wall_end;
+	float	wall_x;
 }	t_ray;
 
 // cleanup
-void	cleanup(t_game game);
+void			cleanup(t_game game);
 
 // init
-int		init(t_game *game, char **argv);
+int				init(t_game *game, char **argv);
+
+// textures
+mlx_texture_t	*get_texture(t_game *game, t_ray ray);
+uint32_t		get_pixel(mlx_texture_t *tex, int x, int y);
 
 // raycasting
-void	set_up_ray(t_player p, t_ray *r, int x);
-void	set_up_dda(t_player p, t_ray *r);
-void	cast_ray(t_game *g, t_ray *r);
-void	get_wall_boundaries(t_ray *r);
-void	draw_col(t_game *g, t_ray r, int x);
+void			set_up_ray(t_player p, t_ray *r, int x);
+void			set_up_dda(t_player p, t_ray *r);
+void			cast_ray(t_game *g, t_ray *r);
+void			set_up_wall(t_game *g, t_ray *r);
+void			draw_col(t_game *g, t_ray r, int x);
 
 // minimap
-void	render_minimap(t_game *game);
+void			render_minimap(t_game *game);
 
 // rendering
-void	render_frame(t_game *game);
+void			render_frame(t_game *game);
 
 // movement
-void	update_movement(t_game *game);
+void			update_movement(t_game *game);
 
 #endif
