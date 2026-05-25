@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 06:59:42 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/25 07:00:04 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/25 08:12:53 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ void	set_up_wall(t_game *g, t_ray *r)
 	else
 		r->wall_dist = r->grid_dist.y - r->cell_dist.y;
 	r->wall_height = HEIGHT / r->wall_dist;
-	r->wall_start = -r->wall_height / 2 + HEIGHT / 2;
+	r->wall_start = HEIGHT / 2 - r->wall_height / 2;
 	if (r->wall_start < 0)
 		r->wall_start = 0;
-	r->wall_end = r->wall_height / 2 + HEIGHT / 2;
+	r->wall_end = HEIGHT / 2 + r->wall_height / 2;
 	if (r->wall_end >= HEIGHT)
 		r->wall_end = HEIGHT - 1;
 	if (r->side == 0)
@@ -109,18 +109,15 @@ void	draw_col(t_game *g, t_ray r, int x)
 
 	tex = get_texture(g, r);
 	tex_pos.x = r.wall_x * tex->width;
-	if ((r.side == 0 && r.ray_dir.x > 0) || (r.side == 1 && r.ray_dir.y < 0))
+	if ((r.side == 0 && r.ray_dir.x < 0) || (r.side == 1 && r.ray_dir.y > 0))
 		tex_pos.x = tex->width - tex_pos.x - 1;
 	y = 0;
 	while (y < r.wall_start)
 		mlx_put_pixel(g->img, x, y++, g->map.ceil_color);
 	step = (float) tex->height / r.wall_height;
 	tex_pos.y = (r.wall_start - HEIGHT / 2 + r.wall_height / 2) * step;
-	y = r.wall_start;
 	while (y < r.wall_end)
 	{
-		if (tex_pos.y >= tex->height)
-			tex_pos.y = tex->height - 1;
 		mlx_put_pixel(g->img, x, y++, get_pixel(tex, tex_pos.x, tex_pos.y));
 		tex_pos.y += step;
 	}
