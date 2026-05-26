@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/19 15:39:44 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/26 12:26:06 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	(void) argc;
+	if (argc != 2)
+	{
+		printf("Please introduce a valid *.cub map file\n");
+		return (EXIT_FAILURE);
+	}
 	if (init(&game, argv))
 		return (EXIT_FAILURE);
 	mlx_loop_hook(game.mlx, &game_loop, &game);

@@ -6,21 +6,21 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/19 15:41:26 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/26 12:59:37 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 // Sets the name of the window to Arg[1] - maps/, so it only works if the name for the map is
-// maps/XXX.yyy. It will crash if strlen(argv[1]) < 5
+// maps/XXX.cub It will crash if strlen(argv[1]) < 5 or doesnt include a .
 static void	set_wname(t_game *game, char **args)
 {
 	int	i;
 
 	i = 0;
 	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
-	if (!game->wname)
+	if (!game->wname) //This can be condensated into a single line when we decide how to do error handling
 	{
 		printf("Set_wname malloc issue");
 		return;
@@ -43,6 +43,25 @@ static void	set_wname(t_game *game, char **args)
 		}
 		i++;
 	}
+}
+
+int	validate(char **argv)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (EXIT_FAILURE);
+	line = get_next_line(fd);
+	while (line)
+	{
+		//printf("%s", line);
+		validate_line(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	return (0);
 }
 
 void	big_HARDcode(t_game *game)
@@ -83,7 +102,8 @@ void	big_HARDcode(t_game *game)
 
 int	init(t_game *game, char **argv)
 {
-	// validate()
+	validate(argv);
+	exit(EXIT_SUCCESS);
 	// parse()
 	if (argv[1])
 		set_wname(game, argv);

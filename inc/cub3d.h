@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/25 06:44:05 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/26 12:37:32 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void			cleanup(t_game game);
 
 // init
 int				init(t_game *game, char **argv);
+int				validate(char **argv);
 
 // textures
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);
