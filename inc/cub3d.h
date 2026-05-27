@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 14:38:46 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 21:01:31 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_game
 	mlx_image_t	*weapon;
 	t_map		map;
 	t_player	player;
+	float		mouse_x;
+	float		mouse_delta;
 	t_tex		tex;
 	char		*wname;
 }	t_game;
@@ -121,5 +123,6 @@ void			render_frame(t_game *game);
 
 // movement
 void			update_movement(t_game *game);
+void			cursor_hook(double xpos, double ypos, void *param);
 
 #endif
