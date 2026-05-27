@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 13:28:48 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:38:46 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_ray
 	t_point	grid_dist;
 	t_point	step;
 	int		side;
+	int		is_door;
 	float	wall_dist;
 	int		wall_height;
 	int		wall_start;

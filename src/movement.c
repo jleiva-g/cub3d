@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 07:03:46 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/18 19:03:30 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:40:05 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ static void	move(t_game *g, int strafe, float speed)
 		new_pos.x = g->player.pos.x + g->player.dir.x * speed;
 		new_pos.y = g->player.pos.y + g->player.dir.y * speed;
 	}
-	if (g->map.grid[(int) g->player.pos.y][(int) new_pos.x] != '1')
+	if (g->map.grid[(int) g->player.pos.y][(int) new_pos.x] != '1'
+		&& g->map.grid[(int) g->player.pos.y][(int) new_pos.x] != 'D')
 		g->player.pos.x = new_pos.x;
-	if (g->map.grid[(int) new_pos.y][(int) g->player.pos.x] != '1')
+	if (g->map.grid[(int) new_pos.y][(int) g->player.pos.x] != '1'
+		&& g->map.grid[(int) new_pos.y][(int) g->player.pos.x] != 'D')
 		g->player.pos.y = new_pos.y;
 }
 

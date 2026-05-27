@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 06:39:50 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/25 07:01:30 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:41:36 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 mlx_texture_t	*get_texture(t_game *game, t_ray ray)
 {
-	if (ray.side == 0 && ray.ray_dir.x > 0)
+	if (ray.is_door)
+		return (game->tex.door);
+	else if (ray.side == 0 && ray.ray_dir.x > 0)
 		return (game->tex.east);
 	else if (ray.side == 0)
 		return (game->tex.west);

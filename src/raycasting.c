@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 06:59:42 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 13:37:02 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:39:21 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	set_up_ray(t_player p, t_ray *r, int x)
 	else
 		r->cell_dist.y = fabsf(1.0f / r->ray_dir.y);
 	r->side = 0;
+	r->is_door = 0;
 }
 
 void	set_up_dda(t_player p, t_ray *r)
@@ -77,6 +78,11 @@ void	cast_ray(t_game *g, t_ray *r)
 		}
 		if (g->map.grid[(int) r->cell.y][(int) r->cell.x] == '1')
 			hit = 1;
+		if (g->map.grid[(int) r->cell.y][(int) r->cell.x] == 'D')
+		{
+			hit = 1;
+			r->is_door = 1;
+		}
 	}
 }
 
