@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 13:07:57 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 13:28:48 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ typedef struct s_map
 typedef struct s_game
 {
 	mlx_t		*mlx;
-	mlx_image_t	*img;
+	mlx_image_t	*view;
+	mlx_image_t	*mmap;
+	mlx_image_t	*weapon;
 	t_map		map;
 	t_player	player;
 	t_tex		tex;

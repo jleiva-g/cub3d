@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/26 12:59:37 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/27 14:37:38 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,11 @@ int	init(t_game *game, char **argv)
 	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
 	if (!game->mlx)
 		return (EXIT_FAILURE);
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!game->img || (mlx_image_to_window(game->mlx, game->img, 0, 0) < 0))
+	game->view = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->view || (mlx_image_to_window(game->mlx, game->view, 0, 0) < 0))
+		return (EXIT_FAILURE);
+	game->mmap = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->mmap || (mlx_image_to_window(game->mlx, game->mmap, 0, 0) < 0))
 		return (EXIT_FAILURE);
 	big_HARDcode(game);
 	return (EXIT_SUCCESS);

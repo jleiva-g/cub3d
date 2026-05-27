@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 14:22:52 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 13:14:40 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 13:40:12 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static void	draw_tile(t_game *game, int x, int y)
 		&& mmap.y < game->map.height)
 	{
 		if (is_not_wall(game->map.grid[(int) mmap.y][(int) mmap.x]))
-			color = 0x227722FF;
+			color = 0x227722DD;
 		else if (game->map.grid[(int) mmap.y][(int) mmap.x] == '1')
-			color = 0x225522FF;
+			color = 0x225522DD;
 		if (game->map.grid[(int) mmap.y][(int) mmap.x] == 'D')
-			color = 0x222277FF;
+			color = 0x2222CCDD;
 	}
-	draw_square(game->img, x * MM_TILE, y * MM_TILE, color);
+	draw_square(game->mmap, x * MM_TILE, y * MM_TILE, color);
 }
 
 void	render_minimap(t_game *game)
@@ -72,5 +72,5 @@ void	render_minimap(t_game *game)
 		y++;
 	}
 	x = (MM_SIZE / 2) * MM_TILE;
-	draw_square(game->img, x, x, 0xCC2222FF);
+	draw_square(game->mmap, x, x, 0xCC2222DD);
 }

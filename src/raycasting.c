@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 06:59:42 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/25 08:12:53 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 13:37:02 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,14 @@ void	draw_col(t_game *g, t_ray r, int x)
 		tex_pos.x = tex->width - tex_pos.x - 1;
 	y = 0;
 	while (y < r.wall_start)
-		mlx_put_pixel(g->img, x, y++, g->map.ceil_color);
+		mlx_put_pixel(g->view, x, y++, g->map.ceil_color);
 	step = (float) tex->height / r.wall_height;
 	tex_pos.y = (r.wall_start - HEIGHT / 2 + r.wall_height / 2) * step;
 	while (y < r.wall_end)
 	{
-		mlx_put_pixel(g->img, x, y++, get_pixel(tex, tex_pos.x, tex_pos.y));
+		mlx_put_pixel(g->view, x, y++, get_pixel(tex, tex_pos.x, tex_pos.y));
 		tex_pos.y += step;
 	}
 	while (y < HEIGHT)
-		mlx_put_pixel(g->img, x, y++, g->map.floor_color);
+		mlx_put_pixel(g->view, x, y++, g->map.floor_color);
 }
