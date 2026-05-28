@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 14:37:38 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 15:59:45 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	validate(char **argv)
 	line = get_next_line(fd);
 	while (line)
 	{
-		//printf("%s", line);
 		validate_line(line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
@@ -102,11 +102,12 @@ void	big_HARDcode(t_game *game)
 
 int	init(t_game *game, char **argv)
 {
-	validate(argv);
-	exit(EXIT_SUCCESS);
+	(void)argv;
+	//validate(argv);
+	//exit(EXIT_SUCCESS);
 	// parse()
-	if (argv[1])
-		set_wname(game, argv);
+	// if (argv[1])
+	// 	set_wname(game, argv);
 	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
 	if (!game->mlx)
 		return (EXIT_FAILURE);
