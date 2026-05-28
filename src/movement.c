@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 07:03:46 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 14:40:05 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/05/27 21:02:57 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,16 @@ void	update_movement(t_game *game)
 		rotate(&game->player, -ROTATE_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rotate(&game->player, ROTATE_SPEED);
+	rotate(&game->player, game->mouse_delta * 0.002f);
+	game->mouse_delta *= 0.75f;
+}
+
+void	cursor_hook(double x, double y, void *param)
+{
+	t_game	*game;
+
+	(void) y;
+	game = param;
+	game->mouse_delta = x - game->mouse_x;
+	game->mouse_x = x;
 }
