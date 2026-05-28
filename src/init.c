@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 15:59:45 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/28 16:30:46 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,38 @@
 
 // Sets the name of the window to Arg[1] - maps/, so it only works if the name for the map is
 // maps/XXX.cub It will crash if strlen(argv[1]) < 5 or doesnt include a .
-static void	set_wname(t_game *game, char **args)
-{
-	int	i;
+// static void	set_wname(t_game *game, char **args)
+// {
+// 	int	i;
 
-	i = 0;
-	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
-	if (!game->wname) //This can be condensated into a single line when we decide how to do error handling
-	{
-		printf("Set_wname malloc issue");
-		return;
-	}
-	while (args[1][i + 5] != '.')
-	{
-		game->wname[i] = args[1][i + 5];
-		i++;
-	}
-	i = 0;
-	while (game->wname[i])
-	{
-		if (i == 0 && ft_isalpha(game->wname[i]))
-			game->wname[i] = ft_toupper(game->wname[i]);
-		else if (game->wname[i - 1] == '_')
-		{
-			if (ft_isalpha(game->wname[i]))
-				game->wname[i] = ft_toupper(game->wname[i]);
-			game->wname[i - 1] = ' ';
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
+// 	if (!game->wname) //This can be condensated into a single line when we decide how to do error handling
+// 	{
+// 		printf("Set_wname malloc issue");
+// 		return;
+// 	}
+// 	while (args[1][i + 5] != '.')
+// 	{
+// 		game->wname[i] = args[1][i + 5];
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (game->wname[i])
+// 	{
+// 		if (i == 0 && ft_isalpha(game->wname[i]))
+// 			game->wname[i] = ft_toupper(game->wname[i]);
+// 		else if (game->wname[i - 1] == '_')
+// 		{
+// 			if (ft_isalpha(game->wname[i]))
+// 				game->wname[i] = ft_toupper(game->wname[i]);
+// 			game->wname[i - 1] = ' ';
+// 		}
+// 		i++;
+// 	}
+// }
 
-int	validate(char **argv)
+int	validate(t_game *game, char **argv)
 {
 	char	*line;
 	int		fd;
@@ -56,7 +56,7 @@ int	validate(char **argv)
 	line = get_next_line(fd);
 	while (line)
 	{
-		validate_line(line);
+		validate_line(game, line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -103,11 +103,14 @@ void	big_HARDcode(t_game *game)
 int	init(t_game *game, char **argv)
 {
 	(void)argv;
-	//validate(argv);
+
+	ft_bzero(game->key, sizeof(game->key));
+	validate(game, argv);
 	//exit(EXIT_SUCCESS);
 	// parse()
 	// if (argv[1])
 	// 	set_wname(game, argv);
+	exit (EXIT_SUCCESS);
 	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
 	if (!game->mlx)
 		return (EXIT_FAILURE);

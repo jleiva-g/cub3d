@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/28 15:46:39 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/28 16:31:42 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@
 # define MOVE_SPEED 0.06f
 # define MM_TILE 16
 # define MM_SIZE 21
+
+typedef enum e_flags
+{
+	NO,
+	SO,
+	EA,
+	WE,
+	F,
+	C
+}	t_flags;
 
 typedef struct s_point
 {
@@ -75,6 +85,7 @@ typedef struct s_game
 	float		mouse_x;
 	float		mouse_delta;
 	t_tex		tex;
+	int			key[6];
 	char		*wname;
 }	t_game;
 
@@ -102,8 +113,8 @@ int				is_not_wall(char cell);
 
 // init
 int				init(t_game *game, char **argv);
-int				validate(char **argv);
-int				validate_line(char *line);
+int				validate(t_game *game, char **argv);
+int				validate_line(t_game *game, char *line);
 
 // textures
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);
