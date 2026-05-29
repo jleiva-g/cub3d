@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/28 16:30:46 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/29 17:04:19 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,37 @@
 // 	}
 // }
 
+static	int	check_key(int key[6])
+{
+	int i;
+
+	i = 0;
+	while (i < 6)
+	{
+		if (!key[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	validate(t_game *game, char **argv)
 {
 	char	*line;
+	int		key[6];
 	int		fd;
 
+	ft_bzero(key, sizeof(key));
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (EXIT_FAILURE);
 	line = get_next_line(fd);
 	while (line)
 	{
-		validate_line(game, line);
+		if (check_key(key))
+			validate_line(line, key);
+		else
+			validate_map(game, line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -104,8 +123,8 @@ int	init(t_game *game, char **argv)
 {
 	(void)argv;
 
-	ft_bzero(game->key, sizeof(game->key));
-	validate(game, argv);
+	if (validate(game, argv) < 0)
+		exit(EXIT_FAILURE);
 	//exit(EXIT_SUCCESS);
 	// parse()
 	// if (argv[1])
