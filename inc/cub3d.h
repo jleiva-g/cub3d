@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/29 17:03:26 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/05/30 16:05:21 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,17 @@ typedef struct s_map
 typedef struct s_game
 {
 	mlx_t		*mlx;
+	char		*wname;
 	mlx_image_t	*view;
 	mlx_image_t	*mmap;
 	mlx_image_t	*weapon;
+	t_tex		tex;
 	t_map		map;
 	t_player	player;
 	float		mouse_x;
 	float		mouse_delta;
-	t_tex		tex;
 	int			key[6];
-	char		*wname;
+	t_point		*doors;
 }	t_game;
 
 typedef struct s_ray
