@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/30 16:05:21 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:08:11 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int				init(t_game *game, char **argv);
 int				validate(t_game *game, char **argv);
 int				validate_line(char *line, int key[6]);
 int				validate_map(t_game *game, char *line);
+int				is_empty(char *line, int size);
 
 // textures
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);

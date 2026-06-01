@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:35:36 by gregueir          #+#    #+#             */
-/*   Updated: 2026/05/29 17:04:57 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:10:34 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	int	validate_line_aux(char *line, int size, int key[6])
 	return (0);
 }
 
-static	int	is_empty(char *line, int size)
+int	is_empty(char *line, int size)
 {
 	int	i;
 
@@ -70,15 +70,29 @@ int	validate_line(char *line, int key[6])
 	return (0);
 }
 
-//WIP
+static	int	is_map(char *line)
+{
+	int	i;
+
+	i = 0;
+	while(line && line[i])
+	{
+		if (line[i] != ' ' || !is_not_wall(line[i]) ||
+			line[i] != '1')
+			return(printf("Invalid character in map"),EXIT_FAILURE);
+		i++;
+	}
+	return (0);
+}
+
 int	validate_map(t_game *game, char *line)
 {
 	int	size;
 
 	size = ft_strlen(line);
-	if (size <= 1 || is_empty(line, size))
-		return (0);
-	else
-		game->map.width = 10;
+	if (game->map.width < size)
+		game->map.width = size;
+	if (is_map(line))
+		return(printf("\n"), EXIT_FAILURE);
 	return (0);
 }

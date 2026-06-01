@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/29 17:04:19 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:12:17 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,16 @@ static	int	check_key(int key[6])
 	return (0);
 }
 
+//I need a flag for "We've started checking the map and now empty lines are not admissible"
 int	validate(t_game *game, char **argv)
 {
 	char	*line;
+	int		err;
 	int		key[6];
 	int		fd;
 
 	ft_bzero(key, sizeof(key));
+	err = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (EXIT_FAILURE);
@@ -73,10 +76,12 @@ int	validate(t_game *game, char **argv)
 	while (line)
 	{
 		if (check_key(key))
-			validate_line(line, key);
+			err = validate_line(line, key);
 		else
-			validate_map(game, line);
+			err = validate_map(game, line);
 		free(line);
+		if (err)
+			return(printf("Something wrong on validation"), EXIT_FAILURE);
 		line = get_next_line(fd);
 	}
 	free(line);
