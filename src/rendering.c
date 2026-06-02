@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 07:02:14 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/30 16:57:25 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:20:27 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	render_view(t_game *game)
 
 void	render_frame(t_game *game)
 {
-	check_doors(game);
+	if (game->doors)
+		check_doors(game);
 	render_view(game);
 	render_minimap(game);
 }
