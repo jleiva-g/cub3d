@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/01 17:12:17 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/03 16:30:44 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static	int	check_key(int key[6])
 	return (0);
 }
 
-//I need a flag for "We've started checking the map and now empty lines are not admissible"
 int	validate(t_game *game, char **argv)
 {
 	char	*line;
@@ -84,6 +83,7 @@ int	validate(t_game *game, char **argv)
 			return(printf("Something wrong on validation"), EXIT_FAILURE);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	free(line);
 	return (0);
 }
@@ -128,13 +128,15 @@ int	init(t_game *game, char **argv)
 {
 	(void)argv;
 
+	game->map.check_map = 0;
+	game->map.width = 0;
 	if (validate(game, argv) < 0)
 		exit(EXIT_FAILURE);
-	//exit(EXIT_SUCCESS);
-	// parse()
+	if (parse(game, argv) < 0)
+		return (printf("Parsing went fuck, cleanup here"), exit(EXIT_FAILURE), 1);
+	exit(EXIT_SUCCESS);
 	// if (argv[1])
 	// 	set_wname(game, argv);
-	exit (EXIT_SUCCESS);
 	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
 	if (!game->mlx)
 		return (EXIT_FAILURE);

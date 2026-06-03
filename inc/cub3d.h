@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/01 17:08:11 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/03 16:14:15 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_map
 	int		height;
 	int		floor_color;
 	int		ceil_color;
+	int		check_map;
 }	t_map;
 
 typedef struct s_game
@@ -86,7 +87,6 @@ typedef struct s_game
 	t_player	player;
 	float		mouse_x;
 	float		mouse_delta;
-	int			key[6];
 	t_point		*doors;
 }	t_game;
 
@@ -111,6 +111,7 @@ void			cleanup(t_game game);
 
 // utils
 int				is_not_wall(char cell);
+int				is_valid_map(char cell);
 
 // init
 int				init(t_game *game, char **argv);
@@ -120,6 +121,9 @@ int				validate(t_game *game, char **argv);
 int				validate_line(char *line, int key[6]);
 int				validate_map(t_game *game, char *line);
 int				is_empty(char *line, int size);
+
+//parsing
+int				parse(t_game *game, char **argv);
 
 // textures
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);

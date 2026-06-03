@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 13:02:28 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/03 13:12:33 by gregueir         ###   ########.fr       */
+/*   Created: 2026/06/03 14:13:13 by gregueir          #+#    #+#             */
+/*   Updated: 2026/06/03 16:29:45 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	is_not_wall(char cell)
+int	parse(t_game *game, char **argv)
 {
-	return (cell == '0' || cell == 'N' || cell == 'S'
-		|| cell == 'E' || cell == 'W' || cell == 'D');
-}
+	(void)game;
+	(void)argv;
 
-int	is_valid_map(char cell)
-{
-	return (cell == '0' || cell == 'N' || cell == 'S'
-		|| cell == 'E' || cell == 'W' || cell == 'D'
-		|| cell == ' ' || cell == '1' || cell == '\n');
+	return (0);
 }

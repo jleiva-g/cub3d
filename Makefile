@@ -1,7 +1,7 @@
 NAME		=	cub3d
 HEADER		=	inc/cub3d.h
 SRC_FILES	=	main.c cleanup.c utils.c init.c textures.c raycasting.c \
-				minimap.c rendering.c movement.c validate_utils.c
+				minimap.c rendering.c movement.c validate_utils.c parse.c
 SRC_DIR		=	src
 SRC			=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR		=	$(SRC_DIR)/obj
@@ -11,7 +11,7 @@ LIBFT		=	$(LIBFT_DIR)/libft.a
 MLX42_DIR	=	inc/MLX42
 BUILD_DIR	=	inc/MLX42build
 MLX42		=	$(BUILD_DIR)/libmlx42.a
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 MFLAGS		=	-ldl -lglfw -pthread -lm
 
 all: $(NAME)
