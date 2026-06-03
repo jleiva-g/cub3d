@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 07:02:14 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/01 16:20:27 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:10:33 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,38 @@ static void	render_view(t_game *game)
 	}
 }
 
+static void	render_weapon(t_game *game)
+{
+	static int	animation = 0;
+	static int	frame = 0;
+	static int	start_frame;
+
+	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT) && !animation)
+	{
+		animation = 1;
+		start_frame = frame;
+	}
+	if (animation && frame - start_frame == 0)
+		game->weapon[1]->enabled = true;
+	if (animation && frame - start_frame == 6)
+	{
+		game->weapon[2]->enabled = true;
+		game->weapon[1]->enabled = false;
+	}
+	if (animation && frame - start_frame == 18)
+	{
+		game->weapon[2]->enabled = false;
+		animation = 0;
+	}
+	if (animation)
+		frame++;
+}
+
 void	render_frame(t_game *game)
 {
 	if (game->doors)
 		check_doors(game);
 	render_view(game);
+	render_weapon(game);
 	render_minimap(game);
 }

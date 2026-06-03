@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/03 16:14:15 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/03 21:09:27 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_tex
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
 	mlx_texture_t	*door;
-	mlx_texture_t	**weapon;
+	mlx_texture_t	*weapon[3];
 }	t_tex;
 
 typedef struct s_player
@@ -81,7 +81,7 @@ typedef struct s_game
 	char		*wname;
 	mlx_image_t	*view;
 	mlx_image_t	*mmap;
-	mlx_image_t	*weapon;
+	mlx_image_t	*weapon[3];
 	t_tex		tex;
 	t_map		map;
 	t_player	player;
