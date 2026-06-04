@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/03 21:09:27 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/04 13:12:31 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef enum e_flags
 {
 	NO,
 	SO,
-	EA,
 	WE,
+	EA,
 	F,
 	C
 }	t_flags;
@@ -121,6 +121,7 @@ int				validate(t_game *game, char **argv);
 int				validate_line(char *line, int key[6]);
 int				validate_map(t_game *game, char *line);
 int				is_empty(char *line, int size);
+int				check_key(int key[6]);
 
 //parsing
 int				parse(t_game *game, char **argv);
