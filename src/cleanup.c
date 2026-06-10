@@ -3,17 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:27:20 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/27 15:43:36 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/10 17:17:02 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	cleanup(t_game game)
+static void	free_tex(t_game *game)
 {
-	//mlx_delete_image(game.mlx, game.img);
-	mlx_terminate(game.mlx);
+	if (game->tex.north)
+		mlx_delete_texture(game->tex.north);
+	if (game->tex.south)
+		mlx_delete_texture(game->tex.south);
+	if (game->tex.west)
+		mlx_delete_texture(game->tex.west);
+	if (game->tex.east)
+		mlx_delete_texture(game->tex.east);
+	if (game->tex.weapon[0])
+		mlx_delete_texture(game->tex.weapon[0]);
+	if (game->tex.weapon[1])
+		mlx_delete_texture(game->tex.weapon[1]);
+	if (game->tex.weapon[2])
+		mlx_delete_texture(game->tex.weapon[2]);
+}
+
+void	cleanup(t_game *game)
+{
+	free(game->wname);
+	if (game->view)
+		mlx_delete_image(game->mlx, game->view);
+	if (game->mmap)
+		mlx_delete_image(game->mlx, game->mmap);
+	if (game->weapon[0])
+		mlx_delete_image(game->mlx, game->weapon[0]);
+	if (game->weapon[1])
+		mlx_delete_image(game->mlx, game->weapon[1]);
+	if (game->weapon[2])
+		mlx_delete_image(game->mlx, game->weapon[2]);
+	free_tex(game);
+	free_split(game->map.grid);
+	free(game->doors);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
+}
+
+void	throw_error(t_game *game, char *err_msg)
+{
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(err_msg, 2);
+	cleanup(game);
+	exit(EXIT_FAILURE);
 }

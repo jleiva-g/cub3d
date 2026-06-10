@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/10 14:34:58 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/10 17:17:48 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@
 # define MOVE_SPEED 0.06f
 # define MM_TILE 16
 # define MM_SIZE 21
+
+# define ERR_M	"malloc: allocation failed"
+# define ERR_X	"MLX42: init failed"
+# define ERR_I	"MLX42: image failed"
+# define ERR_T	"MLX42: texture failed"
 
 typedef enum e_flags
 {
@@ -112,6 +117,7 @@ typedef struct s_ray
 
 // cleanup
 void			cleanup(t_game game);
+void			throw_error(t_game *game, char *err_msg);
 
 // utils
 int				is_not_wall(char cell);
