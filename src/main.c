@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/05/29 18:24:35 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/10 17:19:32 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,12 @@ int	main(int argc, char **argv)
 		printf("Please introduce a valid *.cub map file\n");
 		return (EXIT_FAILURE);
 	}
-	if (init(&game, argv))
-		return (EXIT_FAILURE);
+	init(&game, argv);
 	mlx_loop_hook(game.mlx, &game_loop, &game);
 	mlx_key_hook(game.mlx, &keyhook, game.mlx);
 	mlx_cursor_hook(game.mlx, &cursor_hook, &game);
 	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
 	mlx_loop(game.mlx);
-	free(game.wname); //This should be on the cleanup, it doesnt work on the cleanup
 	cleanup(game);
 	return (EXIT_SUCCESS);
 }

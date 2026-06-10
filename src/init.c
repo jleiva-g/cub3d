@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/04 13:04:57 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/10 17:22:56 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,46 +45,92 @@
 // 	}
 // }
 
-void	big_HARDcode(t_game *game)
+static void	init_mem(t_game *game)
 {
-	static char *map[] = {
-		"1111111111111111111111",
-		"1000000000000000000001",
-		"1000000010000000000001",
-		"1000000001000000000001",
-		"1000000000000000000001",
-		"1011111110111111111101",
-		"1000000010000000000101",
-		"1110111011110111110101",
-		"1000100000010000010101",
-		"1011101110000111010101",
-		"1000001000N00100010001",
-		"1111101010000101111101",
-		"1000101000000100000001",
-		"1010101111111111111101",
-		"1000100000000000000001",
-		"1011111111111111111101",
-		"1000000000000000000001",
-		"1111111111111111111111",
-		NULL
-	};
-	game->map.grid = map;
-	game->map.ceil_color = 0x87CEEBFF;
-	game->map.floor_color = 0x8B4513FF;
-	game->map.height = 18;
-	game->map.width = 0;
-	game->player.pos.x = 10.5;
-	game->player.pos.y = 10.5;
-	game->player.dir.x = -1;
-	game->player.dir.y = 0;
-	game->player.plane.x = -game->player.dir.y * FOV;
-	game->player.plane.y = game->player.dir.x * FOV;
+	game->mlx = NULL;
+	game->wname = NULL;
+	game->view = NULL;
+	game->mmap = NULL;
+	game->weapon[0] = NULL;
+	game->weapon[1] = NULL;
+	game->weapon[2] = NULL;
+	game->tex.north = NULL;
+	game->tex.south = NULL;
+	game->tex.east = NULL;
+	game->tex.west = NULL;
+	game->tex.door = NULL;
+	game->tex.weapon[0] = NULL;
+	game->tex.weapon[1] = NULL;
+	game->tex.weapon[2] = NULL;
+	game->map.grid = NULL;
+	game->mouse_x = WIDTH / 2;
+	game->doors = NULL;
 }
 
-int	init(t_game *game, char **argv)
+static void	load_tex(t_game *game)
 {
-	(void)argv;
+	game->tex.north = mlx_load_png(game->tex.north_path);
+	if (!game->tex.north)
+		throw_error(game, ERR_T);
+	game->tex.south = mlx_load_png(game->tex.south_path);
+	if (!game->tex.south)
+		throw_error(game, ERR_T);
+	game->tex.west = mlx_load_png(game->tex.west_path);
+	if (!game->tex.west)
+		throw_error(game, ERR_T);
+	game->tex.east = mlx_load_png(game->tex.east_path);
+	if (!game->tex.east)
+		throw_error(game, ERR_T);
+	game->tex.door = mlx_load_png("door.png");
+	if (!game->tex.door)
+		throw_error(game, ERR_T);
+	game->tex.weapon[0] = mlx_load_png("f0.png");
+	if (!game->tex.weapon[0])
+		throw_error(game, ERR_T);
+	game->tex.weapon[1] = mlx_load_png("f1.png");
+	if (!game->tex.weapon[1])
+		throw_error(game, ERR_T);
+	game->tex.weapon[2] = mlx_load_png("f2.png");
+	if (!game->tex.weapon[2])
+		throw_error(game, ERR_T);
+}
 
+static void	tex_to_img(t_game *game)
+{
+	game->weapon[0] = mlx_texture_to_image(game->mlx, game->tex.weapon[0]);
+	if (!game->weapon[0]
+		|| (mlx_image_to_window(game->mlx, game->weapon[0], 0, 0) < 0))
+		throw_error(game, ERR_I);
+	game->weapon[1] = mlx_texture_to_image(game->mlx, game->tex.weapon[1]);
+	if (!game->weapon[1]
+		|| (mlx_image_to_window(game->mlx, game->weapon[1], 0, 0) < 0))
+		throw_error(game, ERR_I);
+	game->weapon[2] = mlx_texture_to_image(game->mlx, game->tex.weapon[2]);
+	if (!game->weapon[2]
+		|| (mlx_image_to_window(game->mlx, game->weapon[2], 0, 0) < 0))
+		throw_error(game, ERR_I);
+	game->weapon[1]->enabled = false;
+	game->weapon[2]->enabled = false;
+}
+
+static void	init_mlx(t_game *game)
+{
+	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
+	if (!game->mlx)
+		throw_error(game, ERR_X);
+	game->view = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->view || (mlx_image_to_window(game->mlx, game->view, 0, 0) < 0))
+		throw_error(game, ERR_I);
+	game->mmap = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->mmap || (mlx_image_to_window(game->mlx, game->mmap, 0, 0) < 0))
+		throw_error(game, ERR_I);
+	load_tex(game);
+	tex_to_img(game);
+}
+
+void	init(t_game *game, char **argv)
+{
+	init_mem(game);
 	game->map.check_map = 0;
 	game->map.width = 0;
 	if (validate(game, argv) < 0)
@@ -94,15 +140,5 @@ int	init(t_game *game, char **argv)
 	exit(EXIT_SUCCESS);
 	// if (argv[1])
 	// 	set_wname(game, argv);
-	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
-	if (!game->mlx)
-		return (EXIT_FAILURE);
-	game->view = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!game->view || (mlx_image_to_window(game->mlx, game->view, 0, 0) < 0))
-		return (EXIT_FAILURE);
-	game->mmap = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!game->mmap || (mlx_image_to_window(game->mlx, game->mmap, 0, 0) < 0))
-		return (EXIT_FAILURE);
-	big_HARDcode(game);
-	return (EXIT_SUCCESS);
+	init_mlx(game);
 }
