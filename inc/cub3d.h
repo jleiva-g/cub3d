@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/04 13:12:31 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/10 14:34:58 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef struct s_point
 
 typedef struct s_tex
 {
+	char			*north_path;
+	char			*south_path;
+	char			*west_path;
+	char			*east_path;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
