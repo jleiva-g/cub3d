@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/10 17:22:56 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/11 13:14:00 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,9 @@ void	init(t_game *game, char **argv)
 	game->map.check_map = 0;
 	game->map.width = 0;
 	if (validate(game, argv) < 0)
-		exit(EXIT_FAILURE);
+		throw_error(game, ERR_X);
 	if (parse(game, argv) < 0)
-		return (printf("Parsing went fuck, cleanup here"), exit(EXIT_FAILURE), 1);
+		throw_error(game, ERR_X);
 	exit(EXIT_SUCCESS);
 	// if (argv[1])
 	// 	set_wname(game, argv);

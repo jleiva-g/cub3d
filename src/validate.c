@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 13:05:04 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/04 13:18:03 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/11 13:09:49 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	validate(t_game *game, char **argv)
 	err = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (EXIT_FAILURE);
+		throw_error(game, ERR_R);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -47,7 +47,7 @@ int	validate(t_game *game, char **argv)
 			err = validate_map(game, line);
 		free(line);
 		if (err)
-			return(printf("Something wrong on validation"), EXIT_FAILURE);
+			throw_error(game, ERR_X);
 		line = get_next_line(fd);
 	}
 	close(fd);

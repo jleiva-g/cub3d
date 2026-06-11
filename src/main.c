@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/10 17:19:32 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/11 13:11:13 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int	main(int argc, char **argv)
 	mlx_cursor_hook(game.mlx, &cursor_hook, &game);
 	mlx_set_cursor_mode(game.mlx, MLX_MOUSE_DISABLED);
 	mlx_loop(game.mlx);
-	cleanup(game);
+	cleanup(&game);
 	return (EXIT_SUCCESS);
 }

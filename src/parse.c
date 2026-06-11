@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:13:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/10 16:53:26 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/11 13:09:53 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	char	*extract_path(char *line)
 		str++;
 	out = ft_strdup(str);
 	if (!out)
-		return (ft_printf("Dup error"), NULL);
+		return (NULL);
 	return (out);
 }
 
@@ -40,7 +40,7 @@ static	int	load_textures(t_game *game, char *line, int key[6])
 		if (game->tex.north_path)
 			key[NO] = 1;
 		else
-			return (ft_printf("Error during tex NO"), EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		if (game->tex.north_path)
 			ft_printf("NO is %s\n", game->tex.north_path);
 	}
@@ -58,7 +58,7 @@ int	parse(t_game *game, char **argv)
 	err = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (EXIT_FAILURE);
+		throw_error(game, ERR_R);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -68,7 +68,7 @@ int	parse(t_game *game, char **argv)
 			err = load_map();*/
 		free(line);
 		if (err)
-			return(printf("Something wrong on parsing"), EXIT_FAILURE);
+			throw_error(game, ERR_X);
 		line = get_next_line(fd);
 	}
 	close(fd);
