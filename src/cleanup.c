@@ -6,28 +6,32 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:27:20 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/10 17:17:02 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:24:48 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-static void	free_tex(t_game *game)
+static void	free_tex(t_tex tex)
 {
-	if (game->tex.north)
-		mlx_delete_texture(game->tex.north);
-	if (game->tex.south)
-		mlx_delete_texture(game->tex.south);
-	if (game->tex.west)
-		mlx_delete_texture(game->tex.west);
-	if (game->tex.east)
-		mlx_delete_texture(game->tex.east);
-	if (game->tex.weapon[0])
-		mlx_delete_texture(game->tex.weapon[0]);
-	if (game->tex.weapon[1])
-		mlx_delete_texture(game->tex.weapon[1]);
-	if (game->tex.weapon[2])
-		mlx_delete_texture(game->tex.weapon[2]);
+	free(tex.north_path);
+	free(tex.south_path);
+	free(tex.west_path);
+	free(tex.east_path);
+	if (tex.north)
+		mlx_delete_texture(tex.north);
+	if (tex.south)
+		mlx_delete_texture(tex.south);
+	if (tex.west)
+		mlx_delete_texture(tex.west);
+	if (tex.east)
+		mlx_delete_texture(tex.east);
+	if (tex.weapon[0])
+		mlx_delete_texture(tex.weapon[0]);
+	if (tex.weapon[1])
+		mlx_delete_texture(tex.weapon[1]);
+	if (tex.weapon[2])
+		mlx_delete_texture(tex.weapon[2]);
 }
 
 void	cleanup(t_game *game)
@@ -43,7 +47,7 @@ void	cleanup(t_game *game)
 		mlx_delete_image(game->mlx, game->weapon[1]);
 	if (game->weapon[2])
 		mlx_delete_image(game->mlx, game->weapon[2]);
-	free_tex(game);
+	free_tex(game->tex);
 	free_split(game->map.grid);
 	free(game->doors);
 	if (game->mlx)

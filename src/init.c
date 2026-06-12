@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/11 13:14:00 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:22:08 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,14 @@ static void	init_mem(t_game *game)
 	game->weapon[0] = NULL;
 	game->weapon[1] = NULL;
 	game->weapon[2] = NULL;
+	game->tex.north_path = NULL;
+	game->tex.south_path = NULL;
+	game->tex.west_path = NULL;
+	game->tex.east_path = NULL;
 	game->tex.north = NULL;
 	game->tex.south = NULL;
-	game->tex.east = NULL;
 	game->tex.west = NULL;
+	game->tex.east = NULL;
 	game->tex.door = NULL;
 	game->tex.weapon[0] = NULL;
 	game->tex.weapon[1] = NULL;
