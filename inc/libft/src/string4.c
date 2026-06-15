@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 14:04:16 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/04/23 18:32:58 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/15 15:24:43 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	*free_split(char **split)
 	int	i;
 
 	i = 0;
-	while (split[i])
+	while (split && split[i])
 		free(split[i++]);
 	free(split);
 	return (NULL);
