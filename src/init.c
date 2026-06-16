@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/12 15:22:08 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:55:10 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,32 @@
 
 // Sets the name of the window to Arg[1] - maps/, so it only works if the name for the map is
 // maps/XXX.cub It will crash if strlen(argv[1]) < 5 or doesnt include a .
-// static void	set_wname(t_game *game, char **args)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
-// 	if (!game->wname) //This can be condensated into a single line when we decide how to do error handling
-// 	{
-// 		printf("Set_wname malloc issue");
-// 		return;
-// 	}
-// 	while (args[1][i + 5] != '.')
-// 	{
-// 		game->wname[i] = args[1][i + 5];
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (game->wname[i])
-// 	{
-// 		if (i == 0 && ft_isalpha(game->wname[i]))
-// 			game->wname[i] = ft_toupper(game->wname[i]);
-// 		else if (game->wname[i - 1] == '_')
-// 		{
-// 			if (ft_isalpha(game->wname[i]))
-// 				game->wname[i] = ft_toupper(game->wname[i]);
-// 			game->wname[i - 1] = ' ';
-// 		}
-// 		i++;
-// 	}
-// }
+static void	set_wname(t_game *game, char **args)
+{
+	int	i;
+	i = 0;
+	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
+	if (!game->wname)
+		throw_error(game, ERR_M);
+	while (args[1][i + 5] != '.')
+	{
+		game->wname[i] = args[1][i + 5];
+		i++;
+	}
+	i = 0;
+	while (game->wname[i])
+	{
+		if (i == 0 && ft_isalpha(game->wname[i]))
+			game->wname[i] = ft_toupper(game->wname[i]);
+		else if (game->wname[i - 1] == '_')
+		{
+			if (ft_isalpha(game->wname[i]))
+				game->wname[i] = ft_toupper(game->wname[i]);
+			game->wname[i - 1] = ' ';
+		}
+		i++;
+	}
+}
 
 static void	init_mem(t_game *game)
 {
@@ -132,6 +128,16 @@ static void	init_mlx(t_game *game)
 	tex_to_img(game);
 }
 
+// static	void	test(t_game *game)
+// {
+// 	ft_printf("NO is %s\n", game->tex.north_path);
+// 	ft_printf("SO is %s\n", game->tex.south_path);
+// 	ft_printf("EA is %s\n", game->tex.east_path);
+// 	ft_printf("WE is %s\n", game->tex.west_path);
+// 	ft_printf("F is %x\n", game->map.floor_color);
+// 	ft_printf("C is %x\n", game->map.ceil_color);
+// }
+
 void	init(t_game *game, char **argv)
 {
 	init_mem(game);
@@ -141,8 +147,8 @@ void	init(t_game *game, char **argv)
 		throw_error(game, ERR_X);
 	if (parse(game, argv) < 0)
 		throw_error(game, ERR_X);
+	//test(game);
 	exit(EXIT_SUCCESS);
-	// if (argv[1])
-	// 	set_wname(game, argv);
+	set_wname(game, argv);
 	init_mlx(game);
 }

@@ -1,10 +1,10 @@
 NO tex/North_texture.png lol
-SO dasdadsasds
-WE asasdasada
-EA asdasdasda
+SO tex/South.png
+WE tex/South.png
+EA tex/South.png
 
-F asdadsadads
-C adasdasdsdasd
+F 0,0,0,10
+C 8,2,3
 
 111111111111
 10N000000001

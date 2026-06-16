@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/15 15:29:20 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:49:31 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define MM_TILE 16
 # define MM_SIZE 21
 
+# define ERR_C	"file: invalid color format"
 # define ERR_M	"malloc: allocation failed"
 # define ERR_R	"file: can't read file"
 # define ERR_P	"file: invalid texture path"
@@ -137,6 +138,8 @@ int				check_key(int key[6]);
 
 //parsing
 int				parse(t_game *game, char **argv);
+char			*extract_path(char *line);
+int				extract_color(char *line);
 
 // textures
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);

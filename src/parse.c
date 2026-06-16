@@ -6,27 +6,12 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:13:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/15 16:53:19 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:59:08 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-static	char	*extract_path(char *line)
-{
-	char	**str;
-	char	*out;
-
-	str = ft_split(line, ' ');
-	if (!ft_strnstr(str[1], ".png", ft_strlen(str[1])))
-	{
-		free_split(str);
-		return (NULL);
-	}
-	out = ft_strdup(str[1]);
-	free_split(str);
-	return (out);
-}
 static	int load_textures_ew(t_game *game, char *line, char c)
 {
 	if (c == 'E')
@@ -77,13 +62,42 @@ static	int load_textures_ns(t_game *game, char *line, char c)
 	return (0);
 }
 
-static	int	load_textures(t_game *game, char *line, int key[6])
+static	void	load_textures_aux(t_game *game, char *line, int key[6], int size)
+{
+	if (ft_strnstr(line, "EA ", size))
+	{
+		load_textures_ew(game, line, 'E');
+		key[NO] = 1;
+	}
+	else if (ft_strnstr(line, "F ", size))
+	{
+		game->map.floor_color = extract_color(line);
+		key[F] = 1;
+		if (game->map.floor_color == -1)
+		{
+			free(line);
+			throw_error(game, ERR_C);
+		}
+	}
+	else if (ft_strnstr(line, "C ", size))
+	{
+		game->map.ceil_color = extract_color(line);
+		key[C] = 1;
+		if (game->map.ceil_color == -1)
+		{
+			free(line);
+			throw_error(game, ERR_C);
+		}
+	}
+}
+
+static	void	load_textures(t_game *game, char *line, int key[6])
 {
 	int	size;
 
 	size = ft_strlen(line);
 	if (size <= 1 || is_empty(line, size))
-		return (0);
+		return ;
 	if (ft_strnstr(line, "NO ", size))
 	{
 		load_textures_ns(game, line, 'N');
@@ -99,7 +113,8 @@ static	int	load_textures(t_game *game, char *line, int key[6])
 		load_textures_ew(game, line, 'W');
 		key[WE] = 1;
 	}
-	return (0);
+	else
+		load_textures_aux(game, line, key, size);
 }
 
 int	parse(t_game *game, char **argv)
@@ -117,8 +132,8 @@ int	parse(t_game *game, char **argv)
 	{
 		if (check_key(key))
 			load_textures(game, line, key);
-		/*else
-			load_map();*/
+		else
+			load_map();
 		free(line);
 		line = get_next_line(fd);
 	}
