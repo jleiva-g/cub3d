@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/16 15:55:10 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/17 17:27:33 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	init_mem(t_game *game)
 	game->mlx = NULL;
 	game->wname = NULL;
 	game->view = NULL;
+	game->map.height = 0;
 	game->mmap = NULL;
 	game->weapon[0] = NULL;
 	game->weapon[1] = NULL;
@@ -136,7 +137,25 @@ static void	init_mlx(t_game *game)
 // 	ft_printf("WE is %s\n", game->tex.west_path);
 // 	ft_printf("F is %x\n", game->map.floor_color);
 // 	ft_printf("C is %x\n", game->map.ceil_color);
+// 	ft_printf("Height is %d\nWidth is %d\n", game->map.height, game->map.width);
 // }
+
+void	init_map(t_game *game)
+{
+	int	i;
+
+	game->map.grid = ft_calloc(game->map.height, game->map.width);
+	if (!game->map.grid)
+		throw_error(game, ERR_M);
+	i = 0;
+	while (i < game->map.height)
+	{
+		game->map.grid[i] = malloc(game->map.width * sizeof(char));
+		if (!game->map.grid[i])
+			throw_error(game, ERR_M);
+		i++;
+	}
+}
 
 void	init(t_game *game, char **argv)
 {
@@ -147,7 +166,6 @@ void	init(t_game *game, char **argv)
 		throw_error(game, ERR_X);
 	if (parse(game, argv) < 0)
 		throw_error(game, ERR_X);
-	//test(game);
 	exit(EXIT_SUCCESS);
 	set_wname(game, argv);
 	init_mlx(game);

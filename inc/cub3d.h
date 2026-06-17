@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/16 15:49:31 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/17 13:09:39 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@
 # define MM_SIZE 21
 
 # define ERR_C	"file: invalid color format"
-# define ERR_M	"malloc: allocation failed"
 # define ERR_R	"file: can't read file"
 # define ERR_P	"file: invalid texture path"
+# define ERR_E	"file: empty line on map"
+# define ERR_M	"malloc: allocation failed"
 # define ERR_X	"MLX42: init failed"
 # define ERR_I	"MLX42: image failed"
 # define ERR_T	"MLX42: texture failed"
@@ -128,6 +129,7 @@ int				is_valid_map(char cell);
 
 // init
 void			init(t_game *game, char **argv);
+void			init_map(t_game *game);
 
 //validation
 int				validate(t_game *game, char **argv);
@@ -138,8 +140,9 @@ int				check_key(int key[6]);
 
 //parsing
 int				parse(t_game *game, char **argv);
-char			*extract_path(char *line);
 int				extract_color(char *line);
+char			*extract_path(char *line);
+void			load_map(t_game *game, char *line);
 
 // textures
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);

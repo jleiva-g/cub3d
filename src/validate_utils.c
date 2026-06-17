@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:35:36 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/11 12:06:36 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/17 13:07:37 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	validate_line(char *line, int key[6])
 	return (0);
 }
 
-static	int	is_map(char *line)
+static	int	is_invalid_map(char *line)
 {
 	int	i;
 
@@ -95,9 +95,12 @@ int	validate_map(t_game *game, char *line)
 		return (EXIT_FAILURE);
 	if (game->map.width < size)
 		game->map.width = size;
-	if (is_map(line))
+	if (is_invalid_map(line))
 		return(EXIT_FAILURE);
 	else
+	{
 		game->map.check_map = 1;
+		game->map.height++;
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:13:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/16 15:59:08 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/17 16:53:14 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static	void	load_textures_aux(t_game *game, char *line, int key[6], int size)
 	if (ft_strnstr(line, "EA ", size))
 	{
 		load_textures_ew(game, line, 'E');
-		key[NO] = 1;
+		key[EA] = 1;
 	}
 	else if (ft_strnstr(line, "F ", size))
 	{
@@ -124,6 +124,7 @@ int	parse(t_game *game, char **argv)
 	int		fd;
 
 	ft_bzero(key, sizeof(key));
+	init_map(game);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		throw_error(game, ERR_R);
@@ -133,7 +134,7 @@ int	parse(t_game *game, char **argv)
 		if (check_key(key))
 			load_textures(game, line, key);
 		else
-			load_map();
+			load_map(game, line);
 		free(line);
 		line = get_next_line(fd);
 	}

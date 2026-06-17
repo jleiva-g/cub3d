@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 13:05:04 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/11 13:09:49 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:36:41 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	validate(t_game *game, char **argv)
 			throw_error(game, ERR_X);
 		line = get_next_line(fd);
 	}
+	game->map.check_map = 0;
 	close(fd);
 	return (0);
 }
