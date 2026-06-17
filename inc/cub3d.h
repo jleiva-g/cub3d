@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/17 13:09:39 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/17 17:56:43 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define ERR_R	"file: can't read file"
 # define ERR_P	"file: invalid texture path"
 # define ERR_E	"file: empty line on map"
+# define ERR_Y	"file: invalid map"
 # define ERR_M	"malloc: allocation failed"
 # define ERR_X	"MLX42: init failed"
 # define ERR_I	"MLX42: image failed"
