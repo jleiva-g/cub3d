@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/17 17:27:33 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/18 13:31:50 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	init_map(t_game *game)
 	i = 0;
 	while (i < game->map.height)
 	{
-		game->map.grid[i] = malloc(game->map.width * sizeof(char));
+		game->map.grid[i] = malloc((game->map.width + 1) * sizeof(char));
 		if (!game->map.grid[i])
 			throw_error(game, ERR_M);
 		i++;
@@ -166,7 +166,6 @@ void	init(t_game *game, char **argv)
 		throw_error(game, ERR_X);
 	if (parse(game, argv) < 0)
 		throw_error(game, ERR_X);
-	exit(EXIT_SUCCESS);
 	set_wname(game, argv);
 	init_mlx(game);
 }
