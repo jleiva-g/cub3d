@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/17 17:56:43 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/18 15:59:13 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_map
 	int		floor_color;
 	int		ceil_color;
 	int		check_map;
+	int		check_player;
 }	t_map;
 
 typedef struct s_game
@@ -127,6 +128,7 @@ void			throw_error(t_game *game, char *err_msg);
 // utils
 int				is_not_wall(char cell);
 int				is_valid_map(char cell);
+int				is_player(char cell);
 
 // init
 void			init(t_game *game, char **argv);
