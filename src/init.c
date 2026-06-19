@@ -97,17 +97,22 @@ void	load_tex(t_game *game)
 
 void	tex_to_img(t_game *game)
 {
+	int	x;
+	int	y;
+
+	x = WIDTH / 2 - game->tex.weapon[0]->width / 2;
+	y = HEIGHT - game->tex.weapon[0]->height;
 	game->weapon[0] = mlx_texture_to_image(game->mlx, game->tex.weapon[0]);
 	if (!game->weapon[0]
-		|| (mlx_image_to_window(game->mlx, game->weapon[0], 0, 0) < 0))
+		|| (mlx_image_to_window(game->mlx, game->weapon[0], x, y) < 0))
 		throw_error(game, ERR_I);
 	game->weapon[1] = mlx_texture_to_image(game->mlx, game->tex.weapon[1]);
 	if (!game->weapon[1]
-		|| (mlx_image_to_window(game->mlx, game->weapon[1], 0, 0) < 0))
+		|| (mlx_image_to_window(game->mlx, game->weapon[1], x, y) < 0))
 		throw_error(game, ERR_I);
 	game->weapon[2] = mlx_texture_to_image(game->mlx, game->tex.weapon[2]);
 	if (!game->weapon[2]
-		|| (mlx_image_to_window(game->mlx, game->weapon[2], 0, 0) < 0))
+		|| (mlx_image_to_window(game->mlx, game->weapon[2], x, y) < 0))
 		throw_error(game, ERR_I);
 	game->weapon[1]->enabled = false;
 	game->weapon[2]->enabled = false;
