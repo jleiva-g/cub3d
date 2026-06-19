@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 13:02:28 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/18 15:58:57 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/19 12:53:45 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_player(char cell)
 {
-	return(cell == 'N' || cell == 'S' || cell == 'E' || cell == 'O');
+	return (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'O');
 }
 
 int	is_not_wall(char cell)

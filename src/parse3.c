@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:58:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/18 12:46:51 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/19 12:53:03 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	bool	is_border(t_game *game, int i, int j)
 {
 	if (i == 0 || j == 0 || i == game->map.height - 1
-			|| j == game->map.width - 1)
+		|| j == game->map.width - 1)
 		return (true);
 	return (false);
 }
@@ -51,7 +51,7 @@ static	bool	validity_check(t_game *game)
 	return (false);
 }
 
-void	fill_line(t_game *game, int	fill)
+void	fill_line(t_game *game, int fill)
 {
 	int	i;
 

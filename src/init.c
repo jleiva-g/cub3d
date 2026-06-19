@@ -6,17 +6,16 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/18 16:04:33 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/19 12:50:55 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// Sets the name of the window to Arg[1] - maps/, so it only works if the name for the map is
-// maps/XXX.cub It will crash if strlen(argv[1]) < 5 or doesnt include a .
 static void	set_wname(t_game *game, char **args)
 {
 	int	i;
+
 	i = 0;
 	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
 	if (!game->wname)
@@ -68,7 +67,7 @@ static void	init_mem(t_game *game)
 	game->doors = NULL;
 }
 
-static void	load_tex(t_game *game)
+void	load_tex(t_game *game)
 {
 	game->tex.north = mlx_load_png(game->tex.north_path);
 	if (!game->tex.north)
@@ -82,21 +81,21 @@ static void	load_tex(t_game *game)
 	game->tex.east = mlx_load_png(game->tex.east_path);
 	if (!game->tex.east)
 		throw_error(game, ERR_T);
-	game->tex.door = mlx_load_png("door.png");
+	game->tex.door = mlx_load_png("tex/door.png");
 	if (!game->tex.door)
 		throw_error(game, ERR_T);
-	game->tex.weapon[0] = mlx_load_png("f0.png");
+	game->tex.weapon[0] = mlx_load_png("tex/f0.png");
 	if (!game->tex.weapon[0])
 		throw_error(game, ERR_T);
-	game->tex.weapon[1] = mlx_load_png("f1.png");
+	game->tex.weapon[1] = mlx_load_png("tex/f1.png");
 	if (!game->tex.weapon[1])
 		throw_error(game, ERR_T);
-	game->tex.weapon[2] = mlx_load_png("f2.png");
+	game->tex.weapon[2] = mlx_load_png("tex/f2.png");
 	if (!game->tex.weapon[2])
 		throw_error(game, ERR_T);
 }
 
-static void	tex_to_img(t_game *game)
+void	tex_to_img(t_game *game)
 {
 	game->weapon[0] = mlx_texture_to_image(game->mlx, game->tex.weapon[0]);
 	if (!game->weapon[0]
@@ -114,49 +113,6 @@ static void	tex_to_img(t_game *game)
 	game->weapon[2]->enabled = false;
 }
 
-static void	init_mlx(t_game *game)
-{
-	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
-	if (!game->mlx)
-		throw_error(game, ERR_X);
-	game->view = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!game->view || (mlx_image_to_window(game->mlx, game->view, 0, 0) < 0))
-		throw_error(game, ERR_I);
-	game->mmap = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!game->mmap || (mlx_image_to_window(game->mlx, game->mmap, 0, 0) < 0))
-		throw_error(game, ERR_I);
-	load_tex(game);
-	tex_to_img(game);
-}
-
-// static	void	test(t_game *game)
-// {
-// 	ft_printf("NO is %s\n", game->tex.north_path);
-// 	ft_printf("SO is %s\n", game->tex.south_path);
-// 	ft_printf("EA is %s\n", game->tex.east_path);
-// 	ft_printf("WE is %s\n", game->tex.west_path);
-// 	ft_printf("F is %x\n", game->map.floor_color);
-// 	ft_printf("C is %x\n", game->map.ceil_color);
-// 	ft_printf("Height is %d\nWidth is %d\n", game->map.height, game->map.width);
-// }
-
-void	init_map(t_game *game)
-{
-	int	i;
-
-	game->map.grid = ft_calloc(game->map.height, game->map.width);
-	if (!game->map.grid)
-		throw_error(game, ERR_M);
-	i = 0;
-	while (i < game->map.height)
-	{
-		game->map.grid[i] = malloc((game->map.width + 1) * sizeof(char));
-		if (!game->map.grid[i])
-			throw_error(game, ERR_M);
-		i++;
-	}
-}
-
 void	init(t_game *game, char **argv)
 {
 	init_mem(game);
@@ -169,6 +125,7 @@ void	init(t_game *game, char **argv)
 		throw_error(game, ERR_Y);
 	if (parse(game, argv) < 0)
 		throw_error(game, ERR_X);
+	clean_path(game);
 	set_wname(game, argv);
 	init_mlx(game);
 }

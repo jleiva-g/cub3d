@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/18 15:59:13 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/18 17:03:15 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,10 @@ int				is_player(char cell);
 
 // init
 void			init(t_game *game, char **argv);
+void			init_mlx(t_game *game);
 void			init_map(t_game *game);
+void			load_tex(t_game *game);
+void			tex_to_img(t_game *game);
 
 //validation
 int				validate(t_game *game, char **argv);
@@ -146,6 +149,7 @@ int				parse(t_game *game, char **argv);
 int				extract_color(char *line);
 char			*extract_path(char *line);
 void			load_map(t_game *game, char *line);
+void			clean_path(t_game *game);
 
 // textures
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);

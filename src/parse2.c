@@ -6,11 +6,34 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 11:19:57 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/16 15:53:32 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/19 12:52:41 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	clean_path(t_game *game)
+{
+	char	*tmp;
+	char	*current;
+
+	current = game->tex.north_path;
+	tmp = ft_strnstr(current, "\n", ft_strlen(current));
+	if (tmp)
+		*tmp = '\0';
+	current = game->tex.south_path;
+	tmp = ft_strnstr(current, "\n", ft_strlen(current));
+	if (tmp)
+		*tmp = '\0';
+	current = game->tex.east_path;
+	tmp = ft_strnstr(current, "\n", ft_strlen(current));
+	if (tmp)
+		*tmp = '\0';
+	current = game->tex.west_path;
+	tmp = ft_strnstr(current, "\n", ft_strlen(current));
+	if (tmp)
+		*tmp = '\0';
+}
 
 char	*extract_path(char *line)
 {
@@ -57,7 +80,7 @@ int	extract_color(char *line)
 	if (!ft_strnstr(str[1], ",", ft_strlen(str[1])))
 	{
 		free_split(str);
-		return(-1);
+		return (-1);
 	}
 	num = ft_split(str[1], ',');
 	if (!num[2])

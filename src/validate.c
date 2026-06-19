@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 13:05:04 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/18 16:01:59 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/19 12:55:12 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_key(int key[6])
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 6)

@@ -6,18 +6,18 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 14:13:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/17 16:53:14 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/19 12:52:23 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-static	int load_textures_ew(t_game *game, char *line, char c)
+static	int	load_textures_ew(t_game *game, char *line, char c)
 {
 	if (c == 'E')
 	{
 		if (!game->tex.east_path)
-		game->tex.east_path = extract_path(line);
+			game->tex.east_path = extract_path(line);
 		if (!game->tex.east_path)
 		{
 			free(line);
@@ -27,7 +27,7 @@ static	int load_textures_ew(t_game *game, char *line, char c)
 	else if (c == 'W')
 	{
 		if (!game->tex.west_path)
-		game->tex.west_path = extract_path(line);
+			game->tex.west_path = extract_path(line);
 		if (!game->tex.west_path)
 		{
 			free(line);
@@ -37,12 +37,12 @@ static	int load_textures_ew(t_game *game, char *line, char c)
 	return (0);
 }
 
-static	int load_textures_ns(t_game *game, char *line, char c)
+static	int	load_textures_ns(t_game *game, char *line, char c)
 {
 	if (c == 'N')
 	{
 		if (!game->tex.north_path)
-		game->tex.north_path = extract_path(line);
+			game->tex.north_path = extract_path(line);
 		if (!game->tex.north_path)
 		{
 			free(line);
@@ -52,7 +52,7 @@ static	int load_textures_ns(t_game *game, char *line, char c)
 	else if (c == 'S')
 	{
 		if (!game->tex.south_path)
-		game->tex.south_path = extract_path(line);
+			game->tex.south_path = extract_path(line);
 		if (!game->tex.south_path)
 		{
 			free(line);
@@ -62,7 +62,8 @@ static	int load_textures_ns(t_game *game, char *line, char c)
 	return (0);
 }
 
-static	void	load_textures_aux(t_game *game, char *line, int key[6], int size)
+static	void	load_textures_aux(t_game *game, char *line, int key[6],
+		int size)
 {
 	if (ft_strnstr(line, "EA ", size))
 	{
