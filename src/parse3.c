@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:58:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/19 12:53:03 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/23 12:11:20 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	load_map(t_game *game, char *line)
 		game->map.check_map++;
 	i = game->map.check_map - 1;
 	ft_strcpy(game->map.grid[i], line);
+	search_player(game, line, i);
 	if (ft_strlen(game->map.grid[i]) < (size_t)game->map.width)
 		fill_line(game, i);
 	if (i == (game->map.height - 1))

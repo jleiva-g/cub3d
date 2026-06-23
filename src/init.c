@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/19 12:50:55 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/23 12:06:21 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static void	init_mem(t_game *game)
 	game->map.grid = NULL;
 	game->mouse_x = WIDTH / 2;
 	game->doors = NULL;
+	game->player.dir.x = 0;
+	game->player.dir.y = 0;
 }
 
 void	load_tex(t_game *game)

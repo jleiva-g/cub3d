@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/18 17:03:15 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/23 12:11:29 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void			cleanup(t_game *game);
 void			throw_error(t_game *game, char *err_msg);
 
 // utils
+void			search_player(t_game *game, char *line, int y);
 int				is_not_wall(char cell);
 int				is_valid_map(char cell);
 int				is_player(char cell);
