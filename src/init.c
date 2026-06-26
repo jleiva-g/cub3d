@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/23 12:06:21 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/25 15:53:48 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,13 @@ void	init(t_game *game, char **argv)
 	init_mem(game);
 	game->map.check_map = 0;
 	game->map.check_player = 0;
+	game->map.check_door = 0;
 	game->map.width = 0;
 	if (validate(game, argv) < 0)
 		throw_error(game, ERR_X);
+	// if (game->map.check_door > 0)
+	// 	{
+	// 	}
 	if (game->map.check_player != 1)
 		throw_error(game, ERR_Y);
 	if (parse(game, argv) < 0)

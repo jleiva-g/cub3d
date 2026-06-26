@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:35:36 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/19 12:54:50 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/25 14:56:05 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static	int	is_invalid_map(t_game *game, char *line)
 			return (EXIT_FAILURE);
 		if (is_player(line[i]))
 			game->map.check_player++;
+		if (line[i] == 'D')
+			game->map.check_door++;
 		i++;
 	}
 	if (game->map.check_player > 1)

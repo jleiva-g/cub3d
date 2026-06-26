@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/23 12:11:29 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/25 14:54:06 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_map
 	int		ceil_color;
 	int		check_map;
 	int		check_player;
+	int		check_door;
 }	t_map;
 
 typedef struct s_game

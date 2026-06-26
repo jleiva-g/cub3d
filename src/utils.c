@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 13:02:28 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/23 12:12:20 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/25 10:23:30 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	search_player(t_game *game, char *line, int y)
 {
 	int	i;
 
+	i = 0;
 	while (line && line[i])
 	{
 		if (is_player(line[i]))
@@ -35,6 +36,8 @@ void	search_player(t_game *game, char *line, int y)
 				game->player.dir.x = 1;
 			else
 				game->player.dir.x = -1;
+			game->player.plane.x = -game->player.dir.y * FOV;
+			game->player.plane.y = game->player.dir.x * FOV;
 		}
 		i++;
 	}
