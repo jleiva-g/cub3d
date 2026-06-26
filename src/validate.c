@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 13:05:04 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/19 12:55:12 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/26 13:56:01 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	validate(t_game *game, char **argv)
 			err = validate_map(game, line);
 		free(line);
 		if (err)
-			throw_error(game, ERR_X);
+			throw_error(game, ERR_Y);
 		line = get_next_line(fd);
 	}
 	game->map.check_map = 0;
