@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 13:02:28 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/25 10:23:30 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/26 10:47:15 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,37 @@ int	is_player(char cell)
 	return (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'O');
 }
 
+void	update_player_info(t_game *game, char c, int x, int y)
+{
+	game->player.pos.x = (float)x + 0.5f;
+	game->player.pos.y = (float)y + 0.5f;
+	if (c == 'N')
+		game->player.dir.y = 1;
+	else if (c == 'S')
+		game->player.dir.y = -1;
+	else if (c == 'E')
+		game->player.dir.x = 1;
+	else
+		game->player.dir.x = -1;
+	game->player.plane.x = -game->player.dir.y * FOV;
+	game->player.plane.y = game->player.dir.x * FOV;
+}
+
 void	search_player(t_game *game, char *line, int y)
 {
-	int	i;
+	int			i;
+	static int	doors = 0;
 
 	i = 0;
 	while (line && line[i])
 	{
 		if (is_player(line[i]))
+			update_player_info(game, line[i], i, y);
+		else if (line[i] == 'D')
 		{
-			game->player.pos.x = (float)i + 0.5f;
-			game->player.pos.y = (float)y + 0.5f;
-			if (line[i] == 'N')
-				game->player.dir.y = 1;
-			else if (line[i] == 'S')
-				game->player.dir.y = -1;
-			else if (line[i] == 'E')
-				game->player.dir.x = 1;
-			else
-				game->player.dir.x = -1;
-			game->player.plane.x = -game->player.dir.y * FOV;
-			game->player.plane.y = game->player.dir.x * FOV;
+			game->doors[doors].x = i;
+			game->doors[doors].y = y;
+			doors++;
 		}
 		i++;
 	}

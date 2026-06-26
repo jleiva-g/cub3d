@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/25 15:53:48 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/26 10:48:43 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,16 @@ void	init(t_game *game, char **argv)
 	game->map.width = 0;
 	if (validate(game, argv) < 0)
 		throw_error(game, ERR_X);
-	// if (game->map.check_door > 0)
-	// 	{
-	// 	}
 	if (game->map.check_player != 1)
 		throw_error(game, ERR_Y);
+	if (game->map.check_door > 0)
+	{
+		game->doors = malloc((game->map.check_door + 1) * sizeof(t_point));
+		if (!game->doors)
+			throw_error(game, ERR_M);
+		game->doors[game->map.check_door].x = -1;
+		game->doors[game->map.check_door].y = -1;
+	}
 	if (parse(game, argv) < 0)
 		throw_error(game, ERR_X);
 	clean_path(game);
