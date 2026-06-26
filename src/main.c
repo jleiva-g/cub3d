@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/26 12:47:17 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/06/26 13:15:44 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Please introduce a valid *.cub map file\n");
+		ft_putendl_fd("Please introduce a valid *.cub map file\n", 2);
 		return (EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_game));
