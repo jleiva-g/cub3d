@@ -1,0 +1,177 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/23 18:46:53 by jleiva-g          #+#    #+#             */
+/*   Updated: 2026/06/26 13:46:23 by jleiva-g         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
+
+# include "libft/inc/libft.h"
+# include "MLX42/include/MLX42/MLX42.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <errno.h>
+# include <string.h>
+# include <sys/time.h>
+# include <math.h>
+# include <limits.h>
+# include <float.h>
+
+# define WIDTH 1920
+# define HEIGHT 1080
+# define FOV 0.66f
+# define ROTATE_SPEED 0.04f
+# define MOVE_SPEED 0.06f
+# define MM_TILE 16
+# define MM_SIZE 21
+
+# define ERR_C	"file: invalid color format"
+# define ERR_R	"file: can't read file"
+# define ERR_P	"file: invalid texture path"
+# define ERR_E	"file: empty line on map"
+# define ERR_Y	"file: invalid map"
+# define ERR_M	"malloc: allocation failed"
+# define ERR_X	"MLX42: init failed"
+# define ERR_I	"MLX42: image failed"
+# define ERR_T	"MLX42: texture failed"
+
+typedef enum e_flags
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	F,
+	C
+}	t_flags;
+
+typedef struct s_point
+{
+	float	x;
+	float	y;
+}	t_point;
+
+typedef struct s_tex
+{
+	char			*north_path;
+	char			*south_path;
+	char			*west_path;
+	char			*east_path;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+	mlx_texture_t	*door;
+	mlx_texture_t	*weapon[3];
+}	t_tex;
+
+typedef struct s_player
+{
+	t_point	pos;
+	t_point	dir;
+	t_point	plane;
+}	t_player;
+
+typedef struct s_map
+{
+	char	**grid;
+	int		width;
+	int		height;
+	int		floor_color;
+	int		ceil_color;
+	int		check_map;
+	int		check_player;
+	int		check_door;
+}	t_map;
+
+typedef struct s_game
+{
+	mlx_t		*mlx;
+	char		*wname;
+	mlx_image_t	*view;
+	mlx_image_t	*mmap;
+	mlx_image_t	*weapon[3];
+	t_tex		tex;
+	t_map		map;
+	t_player	player;
+	float		mouse_x;
+	float		mouse_delta;
+	t_point		*doors;
+}	t_game;
+
+typedef struct s_ray
+{
+	t_point	ray_dir;
+	t_point	cell;
+	t_point	cell_dist;
+	t_point	grid_dist;
+	t_point	step;
+	int		side;
+	int		is_door;
+	float	wall_dist;
+	int		wall_height;
+	int		wall_start;
+	int		wall_end;
+	float	wall_x;
+}	t_ray;
+
+// cleanup
+void			cleanup(t_game *game);
+void			throw_error(t_game *game, char *err_msg);
+
+// utils
+void			search_player(t_game *game, char *line, int y);
+int				is_not_wall(char cell);
+int				is_valid_map(char cell);
+int				is_player(char cell);
+
+// init
+void			init(t_game *game, char **argv);
+void			init_mlx(t_game *game);
+void			init_map(t_game *game);
+void			load_tex(t_game *game);
+void			tex_to_img(t_game *game);
+
+//validation
+int				validate(t_game *game, char **argv);
+int				validate_line(char *line, int key[6]);
+int				validate_map(t_game *game, char *line);
+int				is_empty(char *line, int size);
+int				check_key(int key[6]);
+
+//parsing
+int				parse(t_game *game, char **argv);
+int				extract_color(char *line);
+char			*extract_path(char *line);
+void			load_map(t_game *game, char *line);
+void			clean_path(t_game *game);
+
+// textures
+mlx_texture_t	*get_texture(t_game *game, t_ray ray);
+uint32_t		get_pixel(mlx_texture_t *tex, int x, int y);
+
+// raycasting
+void			set_up_ray(t_player p, t_ray *r, int x);
+void			set_up_dda(t_player p, t_ray *r);
+void			cast_ray(t_game *g, t_ray *r);
+void			set_up_wall(t_game *g, t_ray *r);
+void			draw_col(t_game *g, t_ray r, int x);
+
+// minimap
+void			render_minimap(t_game *game);
+
+// rendering
+void			render_frame(t_game *game);
+
+// movement
+void			update_movement(t_game *game);
+void			cursor_hook(double xpos, double ypos, void *param);
+
+#endif
