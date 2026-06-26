@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 16:59:55 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/18 17:00:22 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/26 13:11:41 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_map(t_game *game)
 {
 	int	i;
 
-	game->map.grid = ft_calloc(game->map.height, game->map.width);
+	game->map.grid = ft_calloc(game->map.height + 1, sizeof(char *));
 	if (!game->map.grid)
 		throw_error(game, ERR_M);
 	i = 0;
