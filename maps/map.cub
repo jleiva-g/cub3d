@@ -1,0 +1,14 @@
+NO tex/north.png
+SO tex/south.png
+WE tex/west.png
+EA tex/east.png
+
+F 0,0,255,10
+C 240,2,0
+
+
+1111111
+1000001
+100N001
+1000001
+1111111
