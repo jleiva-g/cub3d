@@ -12,7 +12,7 @@ LIBFT		=	$(LIBFT_DIR)/libft.a
 MLX42_DIR	=	inc/MLX42
 BUILD_DIR	=	inc/MLX42build
 MLX42		=	$(BUILD_DIR)/libmlx42.a
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 MFLAGS		=	-ldl -lglfw -pthread -lm
 
 all: $(NAME)
