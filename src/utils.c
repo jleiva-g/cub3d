@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 13:02:28 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/26 10:47:15 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/26 12:20:21 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_player(char cell)
 {
-	return (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'O');
+	return (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W');
 }
 
 void	update_player_info(t_game *game, char c, int x, int y)
