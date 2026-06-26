@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:27:20 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/15 15:23:45 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/06/26 12:45:23 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	free_tex(t_tex tex)
 		mlx_delete_texture(tex.west);
 	if (tex.east)
 		mlx_delete_texture(tex.east);
+	if (tex.door)
+		mlx_delete_texture(tex.door);
 	if (tex.weapon[0])
 		mlx_delete_texture(tex.weapon[0]);
 	if (tex.weapon[1])
