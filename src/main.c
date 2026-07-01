@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/07/01 16:02:44 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/07/01 16:30:46 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || ft_strlen(argv[1]) < 4)
 	{
-		ft_putendl_fd("Please introduce a valid *.cub map file\n", 2);
+		ft_putendl_fd("Error\nPlease introduce a valid *.cub map file\n", 2);
 		return (EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_game));
