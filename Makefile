@@ -1,4 +1,4 @@
-NAME		=	cub3d
+NAME		=	cub3D
 HEADER		=	inc/cub3d.h
 SRC_FILES	=	main.c cleanup.c utils.c init.c textures.c raycasting.c \
 				minimap.c rendering.c movement.c validate_utils.c parse.c \
