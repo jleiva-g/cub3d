@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 13:02:28 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/26 13:58:54 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/07/01 15:10:31 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	update_player_info(t_game *game, char c, int x, int y)
 	game->player.pos.x = (float)x + 0.5f;
 	game->player.pos.y = (float)y + 0.5f;
 	if (c == 'N')
-		game->player.dir.y = 1;
-	else if (c == 'S')
 		game->player.dir.y = -1;
+	else if (c == 'S')
+		game->player.dir.y = 1;
 	else if (c == 'E')
 		game->player.dir.x = 1;
 	else
