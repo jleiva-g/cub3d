@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/26 13:15:44 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/07/01 15:26:26 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_game));
+	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4))
+		throw_error(&game, ERR_Y);
 	init(&game, argv);
 	mlx_loop_hook(game.mlx, &game_loop, &game);
 	mlx_key_hook(game.mlx, &keyhook, game.mlx);

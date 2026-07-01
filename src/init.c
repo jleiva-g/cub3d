@@ -6,7 +6,7 @@
 /*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 20:17:27 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/06/26 10:48:43 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/07/01 15:28:52 by gregueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	set_wname(t_game *game, char **args)
 	game->wname = ft_calloc((ft_strlen(args[1]) + 1), sizeof(char));
 	if (!game->wname)
 		throw_error(game, ERR_M);
-	while (args[1][i + 5] != '.')
+	while (args[1][i + 5] && args[1][i + 5] != '.')
 	{
 		game->wname[i] = args[1][i + 5];
 		i++;
