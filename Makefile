@@ -7,7 +7,7 @@ SRC_DIR		=	src
 SRC			=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ_DIR		=	$(SRC_DIR)/obj
 OBJ			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
-BONUS_NAME	=	cub3d_bonus
+BONUS_NAME	=	cub3D_bonus
 BONUS_H		=	inc/cub3d_bonus.h
 BONUS_FILES	=	main_bonus.c cleanup_bonus.c utils_bonus.c init_bonus.c \
 				textures_bonus.c raycasting_bonus.c minimap_bonus.c \
