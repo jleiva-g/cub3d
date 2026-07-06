@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 16:59:55 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/26 13:11:41 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/07/06 14:57:57 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_mlx(t_game *game)
 {
-	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, true);
+	game->mlx = mlx_init(WIDTH, HEIGHT, game->wname, false);
 	if (!game->mlx)
 		throw_error(game, ERR_X);
 	game->view = mlx_new_image(game->mlx, WIDTH, HEIGHT);
