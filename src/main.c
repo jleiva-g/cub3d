@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 18:47:11 by jleiva-g          #+#    #+#             */
-/*   Updated: 2026/07/01 16:30:46 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/07/08 16:05:51 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || ft_strlen(argv[1]) < 4)
 	{
-		ft_putendl_fd("Error\nPlease introduce a valid *.cub map file\n", 2);
+		ft_putendl_fd("Error\nPlease introduce a valid *.cub map file", 2);
 		return (EXIT_FAILURE);
 	}
 	ft_bzero(&game, sizeof(t_game));
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4))
-		throw_error(&game, ERR_Y);
+		throw_error(&game, "Please introduce a valid *.cub map file");
 	init(&game, argv);
 	mlx_loop_hook(game.mlx, &game_loop, &game);
 	mlx_key_hook(game.mlx, &keyhook, game.mlx);
