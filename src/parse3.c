@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gregueir <gregueir@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:58:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/23 12:11:20 by gregueir         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:46:55 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	bool	is_border(t_game *game, int i, int j)
 {
 	if (i == 0 || j == 0 || i == game->map.height - 1
-		|| j == game->map.width - 1)
+		|| j == game->map.width - 2)
 		return (true);
 	return (false);
 }

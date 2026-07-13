@@ -6,7 +6,7 @@
 /*   By: jleiva-g <jleiva-g@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:58:13 by gregueir          #+#    #+#             */
-/*   Updated: 2026/06/26 13:45:20 by jleiva-g         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:47:13 by jleiva-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	bool	is_border(t_game *game, int i, int j)
 {
 	if (i == 0 || j == 0 || i == game->map.height - 1
-		|| j == game->map.width - 1)
+		|| j == game->map.width - 2)
 		return (true);
 	return (false);
 }
